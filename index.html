@@ -6,36 +6,30 @@
   <title>API 協作平台 — Low-Code API Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!--
-    Typography (inspired by datajob clean modern SaaS style):
-    - Plus Jakarta Sans  → 現代無襯線標題 / 按鈕
-    - Noto Sans TC       → 中文內文，清晰易讀
-    - JetBrains Mono     → 程式碼 / 路徑
-  -->
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* ── 深色底 + 淡綠色系 ── */
-      --bg:        #070E09;
-      --bg-2:      #0C1810;
-      --bg-3:      #122017;
-      --bg-card:   #0F1C13;
-      --green:     #34D399;    /* 主 accent — emerald-400 清爽淡綠 */
-      --green-lt:  #6EE7B7;    /* 淡一階 */
-      --green-dk:  #10B981;    /* 深一階（hover / active） */
-      --green-dim: rgba(52,211,153,.08); /* 卡片輕底色 */
-      --ink:       #ECFDF5;    /* 主文字（近白帶綠） */
-      --ink-2:     #A3C9B5;    /* 次要文字 */
-      --muted:     #5A7D6A;    /* 輔助文字 */
-      --border:    #1A3325;    /* 邊框 */
-      --border-lt: #234D37;    /* 亮一點的邊框 */
+      /* ── 淺色背景 + 淡綠色系 ── */
+      --bg:        #F4FDF7;      /* 極淺綠白 */
+      --bg-2:      #EBF8F0;      /* 淺綠灰 */
+      --bg-3:      #FFFFFF;
+      --bg-card:   #FFFFFF;
+      --green:     #059669;      /* emerald-600 — 深綠 accent，淺底可讀 */
+      --green-lt:  #10B981;      /* emerald-500 */
+      --green-pale:#D1FAE5;      /* emerald-100 — 輕底色 */
+      --green-dim: rgba(5,150,105,.07);
+      --ink:       #0B1F14;      /* 主文字 深綠黑 */
+      --ink-2:     #3D6B50;      /* 次要文字 */
+      --muted:     #7BA68A;      /* 輔助文字 */
+      --border:    #C6EDD8;      /* 邊框 */
+      --border-lt: #A7D9BC;
 
-      --sans:  'Plus Jakarta Sans', 'Noto Sans TC', 'PingFang TC', sans-serif;
+      --sans:   'Plus Jakarta Sans', 'Noto Sans TC', sans-serif;
       --sans-tc:'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-      --mono:  'JetBrains Mono', monospace;
+      --mono:   'JetBrains Mono', monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -49,12 +43,12 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 漸層光暈背景 */
+    /* 頂部光暈 */
     body::before {
       content: '';
       position: fixed; top: 0; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(52,211,153,.07) 0%, transparent 70%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(5,150,105,.06) 0%, transparent 65%);
       pointer-events: none; z-index: 0;
     }
 
@@ -67,14 +61,14 @@
     }
     .reveal.in { opacity: 1; transform: none; }
     .d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
-    .d4{transition-delay:.28s} .d5{transition-delay:.35s}
+    .d4{transition-delay:.28s}
 
     /* ── Nav ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 3rem;
-      background: rgba(7,14,9,.85); backdrop-filter: blur(16px);
+      padding: 1rem 3rem;
+      background: rgba(244,253,247,.92); backdrop-filter: blur(16px);
       border-bottom: 1px solid transparent; transition: border-color .3s;
     }
     nav.sc { border-color: var(--border); }
@@ -84,8 +78,8 @@
       display: flex; align-items: center; gap: .5rem;
     }
     .logo-icon {
-      width: 28px; height: 28px; border-radius: 6px;
-      background: linear-gradient(135deg, var(--green), var(--green-dk));
+      width: 28px; height: 28px; border-radius: 7px;
+      background: linear-gradient(135deg, var(--green-lt), var(--green));
       display: flex; align-items: center; justify-content: center;
       font-size: .75rem; color: #fff; font-weight: 700;
     }
@@ -93,15 +87,9 @@
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-family: var(--sans); font-size: .8rem; font-weight: 500;
-      color: var(--ink-2); transition: color .2s; letter-spacing: .01em;
+      color: var(--ink-2); transition: color .2s;
     }
     .nav-links a:hover { color: var(--green); }
-    .nav-cta {
-      font-family: var(--sans); font-size: .78rem; font-weight: 600;
-      background: var(--green); color: #070E09; padding: .45rem 1.1rem;
-      border-radius: 6px; transition: all .2s; letter-spacing: .01em;
-    }
-    .nav-cta:hover { background: var(--green-lt); }
 
     .container { max-width: 1100px; margin: 0 auto; padding: 0 3rem; }
 
@@ -109,34 +97,33 @@
     .btn {
       display: inline-flex; align-items: center; gap: .5rem;
       font-family: var(--sans); font-size: .82rem; font-weight: 600;
-      padding: .8rem 1.7rem; border-radius: 8px;
+      padding: .75rem 1.6rem; border-radius: 8px;
       border: 1px solid transparent; transition: all .2s; cursor: pointer;
-      letter-spacing: .01em;
     }
-    .btn-green { background: var(--green); color: #070E09; border-color: var(--green); }
+    .btn-green {
+      background: var(--green); color: #fff; border-color: var(--green);
+    }
     .btn-green:hover { background: var(--green-lt); border-color: var(--green-lt); }
-    .btn-outline { background: transparent; color: var(--ink-2); border-color: var(--border-lt); }
-    .btn-outline:hover { border-color: var(--green); color: var(--green); }
-    .btn-ghost { background: none; border: none; color: var(--muted); font-size: .82rem; padding: 0; transition: color .2s; }
-    .btn-ghost:hover { color: var(--green); }
-
-    /* ── Section label ── */
-    .s-eyebrow {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
-      color: var(--green); margin-bottom: .8rem;
+    .btn-outline {
+      background: transparent; color: var(--ink-2); border-color: var(--border-lt);
     }
-    .s-eyebrow::before { content: ''; width: 1.2rem; height: 1px; background: var(--green); }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+
+    /* ── Section labels ── */
+    .s-eyebrow {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .62rem; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--green); margin-bottom: .75rem;
+    }
+    .s-eyebrow::before { content: ''; width: 1.1rem; height: 1px; background: var(--green); }
     h2.s-title {
       font-family: var(--sans); font-size: clamp(1.9rem, 3.8vw, 3.1rem);
-      font-weight: 700; line-height: 1.2; letter-spacing: -.02em;
-      color: var(--ink);
+      font-weight: 700; line-height: 1.2; letter-spacing: -.02em; color: var(--ink);
     }
     h2.s-title em { font-style: normal; color: var(--green); }
     h2.s-title-tc {
       font-family: var(--sans-tc); font-size: clamp(1.9rem, 3.8vw, 3.1rem);
-      font-weight: 700; line-height: 1.25; letter-spacing: -.01em;
-      color: var(--ink);
+      font-weight: 700; line-height: 1.25; letter-spacing: -.01em; color: var(--ink);
     }
     h2.s-title-tc em { font-style: normal; color: var(--green); }
 
@@ -147,13 +134,16 @@
     }
     .hero-tag {
       display: inline-flex; align-items: center; gap: .4rem;
-      background: var(--green-dim); border: 1px solid rgba(52,211,153,.2);
-      color: var(--green-lt); font-family: var(--mono); font-size: .68rem;
+      background: var(--green-pale); border: 1px solid var(--border);
+      color: var(--green); font-family: var(--mono); font-size: .66rem;
       letter-spacing: .1em; text-transform: uppercase;
-      padding: .32rem .85rem; border-radius: 999px; margin-bottom: 1.6rem;
+      padding: .3rem .85rem; border-radius: 999px; margin-bottom: 1.5rem;
     }
-    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:.4; } }
+    .hero-tag-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:.3; } }
 
     h1 {
       font-family: var(--sans); font-size: clamp(3rem, 7.5vw, 6.5rem);
@@ -164,23 +154,23 @@
     h1 em { font-style: normal; color: var(--green); }
     .hero-sub {
       font-family: var(--sans-tc); font-size: 1.05rem; color: var(--ink-2);
-      max-width: 520px; line-height: 1.85; margin-bottom: 2.5rem; font-weight: 400;
+      max-width: 500px; line-height: 1.9; margin-bottom: 2.5rem;
     }
     .hero-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
 
-    /* ── Stats strip ── */
+    /* ── Stats ── */
     #stats {
-      background: var(--bg-2);
+      background: var(--bg-3);
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
     .stat-row { display: grid; grid-template-columns: repeat(4,1fr); }
-    .stat { padding: 2rem 2rem; border-right: 1px solid var(--border); }
+    .stat { padding: 2rem; border-right: 1px solid var(--border); }
     .stat:last-child { border-right: none; }
     .stat-n {
       font-family: var(--sans); font-size: 2.4rem; font-weight: 700;
       color: var(--green); line-height: 1; margin-bottom: .3rem; letter-spacing: -.03em;
     }
-    .stat-l { font-family: var(--sans-tc); font-size: .75rem; font-weight: 400; color: var(--muted); letter-spacing: .03em; }
+    .stat-l { font-family: var(--sans-tc); font-size: .75rem; color: var(--muted); }
 
     /* ── Intro ── */
     #intro { padding: 6rem 0; position: relative; z-index: 1; }
@@ -193,67 +183,55 @@
 
     /* Code window */
     .code-win {
-      background: var(--bg-card); border: 1px solid var(--border);
+      background: #0D1E14; border: 1px solid #1A3525;
       border-radius: 10px; overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(52,211,153,.06);
+      box-shadow: 0 20px 50px rgba(5,150,105,.12), 0 2px 8px rgba(0,0,0,.15);
     }
     .code-bar {
-      background: var(--bg-3); padding: .65rem 1rem;
+      background: #112019; padding: .65rem 1rem;
       display: flex; align-items: center; gap: .45rem;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #1A3525;
     }
     .dot { width: 9px; height: 9px; border-radius: 50%; }
     .dr{background:#FF5F57} .dy{background:#FEBC2E} .dg{background:#28C840}
     .win-title {
       font-family: var(--mono); font-size: .62rem;
-      color: var(--muted); margin-left: .4rem; letter-spacing: .03em;
+      color: #4B7A60; margin-left: .4rem; letter-spacing: .03em;
     }
-    .code-area {
-      padding: 1.3rem 1.4rem; font-family: var(--mono); font-size: .72rem; line-height: 2;
-    }
-    .ck{color:#34D399} .cs{color:#86EFAC} .cv{color:#67E8F9} .ca{color:#A78BFA}
-    .co{color:#FCD34D} .cm{color:#4B6857} .cw{color:rgba(236,253,245,.65)}
+    .code-area { padding: 1.3rem 1.4rem; font-family: var(--mono); font-size: .72rem; line-height: 2; }
+    .ck{color:#34D399} .cs{color:#86EFAC} .cv{color:#67E8F9}
+    .ca{color:#A78BFA} .co{color:#FCD34D} .cm{color:#3D6B50} .cw{color:rgba(209,250,229,.7)}
 
     /* ── How ── */
     #how {
       padding: 6rem 0;
-      background: var(--bg-2);
+      background: var(--bg-3);
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       position: relative; z-index: 1;
     }
-    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; margin-top: 3.5rem; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 3.5rem; }
     .step { padding: 2.2rem 2.5rem 2.2rem 0; border-right: 1px solid var(--border); }
     .step:nth-child(2) { padding: 2.2rem 2.5rem; }
     .step:last-child { border-right: none; padding: 2.2rem 0 2.2rem 2.5rem; }
     .step-n {
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .14em;
-      color: var(--green); text-transform: uppercase; margin-bottom: .9rem;
+      font-family: var(--mono); font-size: .63rem; letter-spacing: .14em;
+      color: var(--green); text-transform: uppercase; margin-bottom: .85rem;
     }
-    .step-t {
-      font-family: var(--sans-tc); font-size: 1.1rem; font-weight: 600;
-      color: var(--ink); margin-bottom: .55rem;
-    }
+    .step-t { font-family: var(--sans-tc); font-size: 1.08rem; font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
     .step-d { font-family: var(--sans-tc); font-size: .87rem; color: var(--ink-2); line-height: 1.9; }
     code {
       font-family: var(--mono); font-size: .8em;
-      background: var(--bg-3); border: 1px solid var(--border);
-      padding: .1em .38em; border-radius: 3px; color: var(--green-lt);
+      background: var(--green-pale); border: 1px solid var(--border);
+      padding: .1em .38em; border-radius: 3px; color: var(--green);
     }
 
     /* ── Screenshots ── */
     #screens { padding: 6rem 0; overflow: hidden; position: relative; z-index: 1; }
-    .screens-header {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: end; margin-bottom: 3rem;
-    }
-    .screens-desc {
-      font-family: var(--sans-tc); font-size: .95rem;
-      color: var(--ink-2); line-height: 1.95; margin-top: 1.2rem;
-    }
-    /* Tab switcher */
-    .screen-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .screens-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3rem; }
+    .screens-desc { font-family: var(--sans-tc); font-size: .95rem; color: var(--ink-2); line-height: 1.95; margin-top: 1.2rem; }
+    .screen-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
     .stab {
-      font-family: var(--mono); font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+      font-family: var(--mono); font-size: .63rem; letter-spacing: .1em; text-transform: uppercase;
       color: var(--muted); padding: .65rem 1.3rem; border-bottom: 2px solid transparent;
       cursor: pointer; transition: color .2s, border-color .2s;
     }
@@ -263,9 +241,9 @@
 
     /* Browser chrome */
     .browser {
-      background: var(--bg-3); border-radius: 10px 10px 6px 6px;
+      background: #fff; border-radius: 10px 10px 6px 6px;
       border: 1px solid var(--border);
-      box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(52,211,153,.04);
+      box-shadow: 0 24px 60px rgba(5,150,105,.1), 0 2px 8px rgba(0,0,0,.06);
       overflow: hidden; max-width: 980px; margin: 0 auto;
     }
     .browser-chrome {
@@ -277,76 +255,33 @@
     .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
     .bd-r{background:#FF5F57} .bd-y{background:#FEBC2E} .bd-g{background:#28C840}
     .browser-url {
-      flex: 1; background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      flex: 1; background: rgba(255,255,255,.7); border: 1px solid var(--border);
       border-radius: 4px; padding: .26rem .7rem;
       font-family: var(--mono); font-size: .62rem; color: var(--muted); letter-spacing: .02em;
     }
 
-    /* ── Mock UI Base (Light theme inside — matches actual app) ── */
+    /* ── Mock UI (actual app — light theme) ── */
     .mock-ui { font-size: 11px; font-family: 'Noto Sans TC','PingFang TC',sans-serif; background: #F1F3F8; }
     .mock-shell { display: flex; height: 500px; }
 
-    /* Dark navy sidebar */
-    .mock-sidebar {
-      width: 175px; flex-shrink: 0; background: #0f1729;
-      display: flex; flex-direction: column;
-    }
-    .mock-logo {
-      padding: .75rem 1rem .85rem; font-size: .78rem; font-weight: 500;
-      color: rgba(255,255,255,.88); letter-spacing: .02em;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      display: flex; align-items: center; gap: .4rem;
-    }
-    .mock-logo-icon {
-      width: 18px; height: 18px; background: rgba(59,130,246,.25);
-      border: 1px solid rgba(59,130,246,.35); border-radius: 3px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; color: #60A5FA; flex-shrink: 0;
-    }
-    .mock-nav-item {
-      padding: .38rem .9rem .38rem 1rem; font-size: .63rem;
-      color: rgba(255,255,255,.38); display: flex; align-items: center; gap: .45rem;
-      border-left: 2px solid transparent;
-    }
-    .mock-nav-item.active {
-      color: rgba(255,255,255,.92); background: rgba(59,130,246,.14);
-      border-left-color: #3B82F6;
-    }
+    /* Dark navy sidebar (matches actual app) */
+    .mock-sidebar { width: 175px; flex-shrink: 0; background: #0f1729; display: flex; flex-direction: column; }
+    .mock-logo { padding: .75rem 1rem .85rem; font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.88); border-bottom: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: .4rem; }
+    .mock-logo-icon { width: 18px; height: 18px; background: rgba(59,130,246,.25); border: 1px solid rgba(59,130,246,.35); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 9px; color: #60A5FA; flex-shrink: 0; }
+    .mock-nav-item { padding: .38rem .9rem .38rem 1rem; font-size: .63rem; color: rgba(255,255,255,.38); display: flex; align-items: center; gap: .45rem; border-left: 2px solid transparent; }
+    .mock-nav-item.active { color: rgba(255,255,255,.92); background: rgba(59,130,246,.14); border-left-color: #3B82F6; }
     .mock-nav-item svg { flex-shrink: 0; opacity: .6; }
     .mock-nav-item.active svg { opacity: 1; }
-    .mock-nav-section {
-      padding: .6rem 1rem .15rem; font-size: .5rem; letter-spacing: .12em;
-      text-transform: uppercase; color: rgba(255,255,255,.18); margin-top: .2rem;
-    }
-    .mock-nav-user {
-      margin-top: auto; padding: .6rem 1rem;
-      border-top: 1px solid rgba(255,255,255,.06);
-      display: flex; align-items: center; gap: .4rem;
-    }
-    .mock-nav-user-icon {
-      width: 20px; height: 20px; border-radius: 50%;
-      background: rgba(59,130,246,.3); border: 1px solid rgba(59,130,246,.4);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .55rem; color: #93C5FD; flex-shrink: 0;
-    }
+    .mock-nav-section { padding: .6rem 1rem .15rem; font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.18); margin-top: .2rem; }
+    .mock-nav-user { margin-top: auto; padding: .6rem 1rem; border-top: 1px solid rgba(255,255,255,.06); display: flex; align-items: center; gap: .4rem; }
+    .mock-nav-user-icon { width: 20px; height: 20px; border-radius: 50%; background: rgba(59,130,246,.3); border: 1px solid rgba(59,130,246,.4); display: flex; align-items: center; justify-content: center; font-size: .55rem; color: #93C5FD; flex-shrink: 0; }
     .mock-nav-user-name { font-size: .58rem; color: rgba(255,255,255,.5); }
-    .mock-nav-user-badge {
-      margin-left: auto; font-size: .48rem; padding: .08rem .32rem;
-      background: rgba(239,68,68,.2); color: #FCA5A5;
-      border: 1px solid rgba(239,68,68,.25); border-radius: 2px;
-    }
+    .mock-nav-user-badge { margin-left: auto; font-size: .48rem; padding: .08rem .32rem; background: rgba(239,68,68,.2); color: #FCA5A5; border: 1px solid rgba(239,68,68,.25); border-radius: 2px; }
     .mock-main { flex: 1; min-width: 0; display: flex; flex-direction: column; overflow: hidden; }
-    .mock-topbar {
-      background: #fff; border-bottom: 1px solid #E2E8F0;
-      padding: .5rem 1.1rem; display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
-    }
+    .mock-topbar { background: #fff; border-bottom: 1px solid #E2E8F0; padding: .5rem 1.1rem; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
     .mock-page-title { font-size: .82rem; font-weight: 500; color: #1E293B; }
     .mock-actions { display: flex; gap: .35rem; }
-    .mock-btn {
-      font-size: .58rem; padding: .22rem .6rem; border: 1px solid;
-      border-radius: 3px; font-family: 'Noto Sans TC',sans-serif; font-weight: 500; cursor: pointer;
-    }
+    .mock-btn { font-size: .58rem; padding: .22rem .6rem; border: 1px solid; border-radius: 3px; font-family: 'Noto Sans TC',sans-serif; font-weight: 500; }
     .mock-btn-primary { background: #1E3A8A; color: #fff; border-color: #1E3A8A; }
     .mock-btn-outline { background: none; color: #64748B; border-color: #CBD5E1; }
     .mock-btn-success { background: #166534; color: #fff; border-color: #166534; }
@@ -358,15 +293,11 @@
     .mock-table tr:last-child td { border-bottom: none; }
     .mock-table tr:hover td { background: #F8FAFC; }
     .m-badge { display: inline-flex; align-items: center; padding: .1rem .42rem; border-radius: 3px; font-size: .57rem; font-weight: 500; letter-spacing: .03em; line-height: 1.5; }
-    .m-get    { background: #DBEAFE; color: #1D4ED8; }
-    .m-post   { background: #DCFCE7; color: #166534; }
-    .m-put    { background: #FEF3C7; color: #92400E; }
-    .m-online { background: #DCFCE7; color: #166534; border: 1px solid #BBF7D0; }
-    .m-draft  { background: #F1F5F9; color: #64748B; border: 1px solid #E2E8F0; }
-    .m-offline{ background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
-    .m-select { background: #EDE9FE; color: #5B21B6; }
-    .m-insert { background: #DCFCE7; color: #166534; }
-    .m-auth   { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE68A; }
+    .m-get{background:#DBEAFE;color:#1D4ED8} .m-post{background:#DCFCE7;color:#166534}
+    .m-online{background:#DCFCE7;color:#166534;border:1px solid #BBF7D0}
+    .m-draft{background:#F1F5F9;color:#64748B;border:1px solid #E2E8F0}
+    .m-select{background:#EDE9FE;color:#5B21B6} .m-insert{background:#DCFCE7;color:#166534}
+    .m-auth{background:#FEF9C3;color:#854D0E;border:1px solid #FDE68A}
     .mock-conn { color: #94A3B8; font-family: 'JetBrains Mono',monospace; font-size: .58rem; }
     .mock-td-name { font-weight: 500; color: #1E293B; }
     .mock-proj-panel { width: 115px; flex-shrink: 0; background: #fff; border: 1px solid #E2E8F0; border-radius: 4px; overflow: hidden; align-self: flex-start; font-size: .62rem; }
@@ -377,13 +308,13 @@
     .mock-proj-count { background: #E2E8F0; color: #64748B; font-size: .5rem; padding: .05rem .28rem; border-radius: 2px; }
     .mock-proj-item.active .mock-proj-count { background: #DBEAFE; color: #1D4ED8; }
     .mock-proj-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-    /* API文件 */
+    /* API 文件 */
     .mock-doc-sidebar { width: 148px; flex-shrink: 0; background: #fff; border-right: 1px solid #E2E8F0; display: flex; flex-direction: column; overflow: hidden; }
     .mock-doc-search { padding: .45rem .65rem; border-bottom: 1px solid #E2E8F0; }
     .mock-doc-search-input { width: 100%; padding: .25rem .5rem; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 3px; font-size: .58rem; color: #94A3B8; }
     .mock-doc-section { padding: .35rem .65rem .1rem; font-size: .52rem; letter-spacing: .08em; text-transform: uppercase; color: #94A3B8; font-weight: 500; }
     .mock-doc-api-item { padding: .3rem .65rem; border-bottom: 1px solid #F8FAFC; }
-    .mock-doc-api-name { font-size: .6rem; color: #334155; font-weight: 500; margin-bottom: .08rem; }
+    .mock-doc-api-name { font-size: .6rem; color: #334155; font-weight: 500; margin-bottom: .06rem; }
     .mock-doc-api-path { font-family: 'JetBrains Mono',monospace; font-size: .52rem; color: #94A3B8; }
     .mock-doc-main { flex: 1; overflow: auto; padding: .8rem 1rem; }
     .mock-doc-cards { display: flex; gap: .5rem; margin-bottom: .85rem; }
@@ -422,8 +353,7 @@
     .mock-perm-table tr:last-child td { border-bottom: none; }
     .perm-ok{color:#22C55E;font-weight:600} .perm-ok::before{content:'✓ '}
     .perm-no{color:#CBD5E1} .perm-no::before{content:'○ '}
-    .perm-partial{color:#F59E0B;font-weight:500}
-    .perm-readonly{color:#60A5FA;font-weight:500}
+    .perm-partial{color:#F59E0B;font-weight:500} .perm-readonly{color:#60A5FA;font-weight:500}
     .mock-perm-info{font-size:.55rem;color:#94A3B8;padding:.3rem .6rem .1rem;display:flex;align-items:center;gap:.25rem}
 
     /* ── Features ── */
@@ -431,16 +361,13 @@
     .feat-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 3.5rem; }
     .feat-intro { font-family: var(--sans-tc); font-size: .95rem; color: var(--ink-2); line-height: 1.95; margin-top: 1.2rem; }
     .feat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-    .feat-card {
-      background: var(--bg-card); padding: 2rem;
-      transition: background .2s;
-    }
-    .feat-card:hover { background: var(--bg-3); }
+    .feat-card { background: var(--bg-3); padding: 2rem; transition: background .2s; }
+    .feat-card:hover { background: var(--bg-2); }
     .feat-icon {
       width: 38px; height: 38px; border-radius: 8px;
-      background: var(--green-dim); border: 1px solid rgba(52,211,153,.2);
+      background: var(--green-pale); border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      color: var(--green); margin-bottom: 1.2rem;
+      color: var(--green); margin-bottom: 1.1rem;
     }
     .feat-name { font-family: var(--sans-tc); font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: .4rem; }
     .feat-desc { font-family: var(--sans-tc); font-size: .84rem; color: var(--ink-2); line-height: 1.9; }
@@ -448,7 +375,7 @@
     /* ── Arch ── */
     #arch {
       padding: 6rem 0;
-      background: var(--bg-2);
+      background: var(--bg-3);
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       position: relative; z-index: 1;
     }
@@ -461,67 +388,38 @@
     .arch-txt strong { color: var(--ink); font-weight: 600; }
     /* flow */
     .flow { font-family: var(--mono); font-size: .68rem; }
-    .fbox {
-      background: var(--bg-card); border: 1px solid var(--border);
-      padding: .8rem 1.2rem; color: var(--ink-2);
-      display: flex; align-items: center; gap: .75rem; border-radius: 4px;
-    }
-    .fbox-hi { border-color: var(--green); background: var(--green-dim); color: var(--ink); }
+    .fbox { background: var(--bg-2); border: 1px solid var(--border); padding: .8rem 1.2rem; color: var(--ink-2); display: flex; align-items: center; gap: .75rem; border-radius: 4px; }
+    .fbox-hi { border-color: var(--green-lt); background: var(--green-pale); color: var(--ink); }
     .farr { text-align: center; color: var(--border-lt); padding: .4rem 0; }
-    .ftag {
-      margin-left: auto; font-size: .55rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--green); background: var(--green-dim); padding: .18rem .5rem;
-      border: 1px solid rgba(52,211,153,.2); border-radius: 3px;
-    }
+    .ftag { margin-left: auto; font-size: .55rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green); background: var(--green-pale); padding: .18rem .5rem; border: 1px solid var(--border); border-radius: 3px; }
 
     /* ── Stack ── */
-    #stack {
-      padding: 4.5rem 0;
-      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      position: relative; z-index: 1;
-    }
+    #stack { padding: 4.5rem 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; z-index: 1; }
     .stack-row { display: flex; align-items: center; gap: 2rem; }
     .stack-lbl { font-family: var(--mono); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
     .stack-div { width: 1px; height: 1.8rem; background: var(--border); flex-shrink: 0; }
     .tags { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .tag {
-      font-family: var(--mono); font-size: .68rem; color: var(--ink-2);
-      border: 1px solid var(--border); padding: .32rem .75rem; border-radius: 4px;
-      transition: all .2s;
-    }
-    .tag:hover { border-color: var(--green); color: var(--green); }
+    .tag { font-family: var(--mono); font-size: .68rem; color: var(--ink-2); border: 1px solid var(--border); padding: .32rem .75rem; border-radius: 4px; transition: all .2s; background: var(--bg-3); }
+    .tag:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
 
     /* ── CTA ── */
-    #cta {
-      padding: 8rem 0; text-align: center;
-      position: relative; z-index: 1; overflow: hidden;
-    }
+    #cta { padding: 8rem 0; text-align: center; position: relative; z-index: 1; overflow: hidden; }
     .cta-glow {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
       width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(52,211,153,.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(5,150,105,.08) 0%, transparent 70%);
       pointer-events: none;
     }
     .cta-inner { position: relative; z-index: 1; }
-    .cta-title {
-      font-family: var(--sans-tc); font-size: clamp(2rem, 4.5vw, 3.8rem);
-      font-weight: 700; color: var(--ink); line-height: 1.25;
-      margin-bottom: 1.2rem; letter-spacing: -.01em;
-    }
+    .cta-title { font-family: var(--sans-tc); font-size: clamp(2rem, 4.5vw, 3.8rem); font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 1.2rem; }
     .cta-title em { font-style: normal; color: var(--green); }
     .cta-sub { font-family: var(--sans-tc); font-size: .95rem; color: var(--ink-2); max-width: 440px; margin: 0 auto 2.2rem; line-height: 1.95; }
     .cta-btns { display: flex; align-items: center; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
 
     /* ── Footer ── */
-    footer {
-      background: var(--bg-2);
-      border-top: 1px solid var(--border); padding: 2.5rem 0;
-    }
+    footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 2.5rem 0; }
     .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
-    .footer-logo {
-      font-family: var(--sans); font-size: 1rem; font-weight: 700;
-      color: var(--ink); display: flex; align-items: center; gap: .4rem;
-    }
+    .footer-logo { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: .4rem; }
     .footer-logo em { font-style: normal; color: var(--green); }
     .footer-meta { font-family: var(--sans-tc); font-size: .72rem; color: var(--muted); }
     .footer-links { display: flex; gap: 1.6rem; }
@@ -559,12 +457,11 @@
     <li><a href="#features">功能</a></li>
     <li><a href="#arch">架構</a></li>
   </ul>
-  <a href="https://github.com" class="nav-cta" target="_blank">查看原始碼</a>
 </nav>
 
 <!-- Hero -->
 <section id="hero">
-  <div class="container hero-inner">
+  <div class="container">
     <div class="hero-tag reveal">
       <span class="hero-tag-dot"></span>
       Low-Code API Platform
@@ -578,11 +475,8 @@
       無需後端開發，無需部署流程。
     </p>
     <div class="hero-actions reveal d3">
-      <a href="https://github.com" class="btn btn-green" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub 原始碼
-      </a>
-      <a href="#intro" class="btn btn-outline">了解更多 →</a>
+      <a href="#screens" class="btn btn-green">查看功能預覽 →</a>
+      <a href="#intro" class="btn btn-outline">了解更多</a>
     </div>
   </div>
 </section>
@@ -623,13 +517,13 @@
             <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="cv">s.qty_onhand, s.qty_reserved</span>,</div>
             <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="co">(s.qty_onhand - s.qty_reserved)</span> <span class="ck">AS</span> <span class="cs">available</span></div>
             <div><span class="ck">FROM</span> <span class="ca">dim_product</span> <span class="cw"> p</span></div>
-            <div><span class="ck">JOIN</span> <span class="ca">fact_stock</span> <span class="cw"> s</span> <span class="co">ON</span> <span class="cw"> s.product_id = p.id</span></div>
+            <div><span class="ck">JOIN</span> <span class="ca">fact_stock</span> <span class="cw"> s</span> <span class="co"> ON</span> <span class="cw"> s.product_id = p.id</span></div>
             <div><span class="ck">WHERE</span> <span class="cw"> 1=1</span></div>
             <div>&nbsp; <span class="co">{{if warehouse}}</span></div>
-            <div>&nbsp; <span class="ck">AND</span> <span class="cw"> s.warehouse_code =</span> <span class="cs">:warehouse</span></div>
+            <div>&nbsp; <span class="ck">AND</span> <span class="cw"> s.warehouse_code =</span> <span class="cs"> :warehouse</span></div>
             <div>&nbsp; <span class="co">{{/if}}</span></div>
             <div>&nbsp; <span class="co">{{if min_qty}}</span></div>
-            <div>&nbsp; <span class="ck">AND</span> <span class="cw"> s.qty_onhand &gt;=</span> <span class="cs">:min_qty</span></div>
+            <div>&nbsp; <span class="ck">AND</span> <span class="cw"> s.qty_onhand &gt;=</span> <span class="cs"> :min_qty</span></div>
             <div>&nbsp; <span class="co">{{/if}}</span></div>
           </div>
         </div>
@@ -672,15 +566,15 @@
         <h2 class="s-title-tc reveal d1">直覺的<br><em>管理介面</em></h2>
       </div>
       <p class="screens-desc reveal d2">
-        從 API 管理列表到 API 文件總覽，再到使用者權限管理，所有操作集中在同一介面完成。深藍側邊欄、清晰的狀態標示，讓維護工作一目瞭然。
+        從 API 管理列表到 API 文件總覽，再到使用者權限管理，所有操作集中在同一介面完成。清晰的狀態標示，讓維護工作一目瞭然。
       </p>
     </div>
 
     <div class="reveal d1">
       <div class="screen-tabs">
-        <div class="stab active" onclick="switchTab(0,this)">API 管理</div>
-        <div class="stab" onclick="switchTab(1,this)">API 文件</div>
-        <div class="stab" onclick="switchTab(2,this)">使用者管理</div>
+        <div class="stab active" onclick="switchTab(0)">API 管理</div>
+        <div class="stab" onclick="switchTab(1)">API 文件</div>
+        <div class="stab" onclick="switchTab(2)">使用者管理</div>
       </div>
 
       <!-- Screen 1: API 管理 -->
@@ -690,56 +584,54 @@
             <div class="browser-dots"><div class="browser-dot bd-r"></div><div class="browser-dot bd-y"></div><div class="browser-dot bd-g"></div></div>
             <div class="browser-url">localhost:8088/apis</div>
           </div>
-          <div class="mock-ui">
-            <div class="mock-shell">
-              <div class="mock-sidebar">
-                <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
-                <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-                <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
-                <div class="mock-nav-section">執行</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
-                <div class="mock-nav-section">Admin</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>備份管理</div>
-                <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
-              </div>
-              <div class="mock-main">
-                <div class="mock-topbar">
-                  <div class="mock-page-title">API 管理</div>
-                  <div class="mock-actions">
-                    <div class="mock-btn mock-btn-outline">全部狀態 ▾</div>
-                    <div class="mock-btn mock-btn-outline" style="display:flex;align-items:center;gap:.2rem;"><span style="color:#F59E0B;">🔒</span> 認證說明</div>
-                    <div class="mock-btn mock-btn-primary">＋ 新增 API</div>
-                  </div>
+          <div class="mock-ui"><div class="mock-shell">
+            <div class="mock-sidebar">
+              <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
+              <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+              <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
+              <div class="mock-nav-section">執行</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
+              <div class="mock-nav-section">Admin</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>備份管理</div>
+              <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-topbar">
+                <div class="mock-page-title">API 管理</div>
+                <div class="mock-actions">
+                  <div class="mock-btn mock-btn-outline">全部狀態 ▾</div>
+                  <div class="mock-btn mock-btn-outline" style="display:flex;align-items:center;gap:.2rem;"><span style="color:#F59E0B;">🔒</span> 認證說明</div>
+                  <div class="mock-btn mock-btn-primary">＋ 新增 API</div>
                 </div>
-                <div class="mock-content" style="display:flex;gap:.75rem;padding:.75rem .9rem;">
-                  <div class="mock-proj-panel">
-                    <div class="mock-proj-header">專案 <span style="font-size:.65rem;color:#3B82F6;">＋</span></div>
-                    <div class="mock-proj-item active">全部 API <span class="mock-proj-count">6</span></div>
-                    <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#3B82F6;"></span>銷售報表</div>
-                    <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#10B981;"></span>供應鏈</div>
-                    <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#F59E0B;"></span>財務部門</div>
-                  </div>
-                  <div style="flex:1;min-width:0;">
-                    <div style="font-size:.58rem;color:#94A3B8;margin-bottom:.4rem;">共 6 筆</div>
-                    <table class="mock-table" style="table-layout:fixed;">
-                      <thead><tr><th style="width:22%">API 名稱</th><th style="width:7%">方法</th><th style="width:20%">路徑</th><th style="width:9%">類型</th><th style="width:9%">連線</th><th style="width:11%">狀態</th><th style="width:22%">操作</th></tr></thead>
-                      <tbody>
-                        <tr><td class="mock-td-name">銷售績效分析</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/sales/performance</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">PROD_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
-                        <tr><td class="mock-td-name">庫存安全水位</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/inv/safety-stock</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">WMS_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
-                        <tr><td class="mock-td-name" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">訂單進度追蹤 <span class="m-badge m-auth" style="font-size:.5rem;">🔒</span></td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/orders/progress</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">ERP_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
-                        <tr><td class="mock-td-name">財務月報彙整</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/finance/monthly</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">FIN_DB</td><td><span class="m-badge m-draft">草稿</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-success" style="font-size:.54rem;">發布</span></td></tr>
-                        <tr><td class="mock-td-name">供應商評分查詢</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/vendor/score</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">ERP_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
-                        <tr><td class="mock-td-name" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">客服工單統計 <span class="m-badge m-auth" style="font-size:.5rem;">🔒</span></td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/service/tickets</td><td><span class="m-badge m-insert" style="font-size:.54rem;">INSERT</span></td><td class="mock-conn">CRM_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
-                      </tbody>
-                    </table>
-                  </div>
+              </div>
+              <div class="mock-content" style="display:flex;gap:.75rem;padding:.75rem .9rem;">
+                <div class="mock-proj-panel">
+                  <div class="mock-proj-header">專案 <span style="font-size:.65rem;color:#3B82F6;">＋</span></div>
+                  <div class="mock-proj-item active">全部 API <span class="mock-proj-count">6</span></div>
+                  <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#3B82F6;"></span>銷售報表</div>
+                  <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#10B981;"></span>供應鏈</div>
+                  <div class="mock-proj-item" style="gap:.4rem;"><span class="mock-proj-dot" style="background:#F59E0B;"></span>財務部門</div>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:.58rem;color:#94A3B8;margin-bottom:.4rem;">共 6 筆</div>
+                  <table class="mock-table" style="table-layout:fixed;">
+                    <thead><tr><th style="width:22%">API 名稱</th><th style="width:7%">方法</th><th style="width:20%">路徑</th><th style="width:9%">類型</th><th style="width:9%">連線</th><th style="width:11%">狀態</th><th style="width:22%">操作</th></tr></thead>
+                    <tbody>
+                      <tr><td class="mock-td-name">銷售績效分析</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/sales/performance</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">PROD_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
+                      <tr><td class="mock-td-name">庫存安全水位</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/inv/safety-stock</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">WMS_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
+                      <tr><td class="mock-td-name" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">訂單進度追蹤 <span class="m-badge m-auth" style="font-size:.5rem;">🔒</span></td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/orders/progress</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">ERP_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
+                      <tr><td class="mock-td-name">財務月報彙整</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/finance/monthly</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">FIN_DB</td><td><span class="m-badge m-draft">草稿</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-success" style="font-size:.54rem;">發布</span></td></tr>
+                      <tr><td class="mock-td-name">供應商評分查詢</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/vendor/score</td><td><span class="m-badge m-select" style="font-size:.54rem;">SELECT</span></td><td class="mock-conn">ERP_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
+                      <tr><td class="mock-td-name" style="display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">客服工單統計 <span class="m-badge m-auth" style="font-size:.5rem;">🔒</span></td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/service/tickets</td><td><span class="m-badge m-insert" style="font-size:.54rem;">INSERT</span></td><td class="mock-conn">CRM_DB</td><td><span class="m-badge m-online">● Online</span></td><td><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">範例</span><span class="mock-btn mock-btn-outline" style="font-size:.54rem;margin-right:2px;">編輯</span><span class="mock-btn mock-btn-warning" style="font-size:.54rem;">下線</span></td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </div>
       </div>
 
@@ -750,64 +642,62 @@
             <div class="browser-dots"><div class="browser-dot bd-r"></div><div class="browser-dot bd-y"></div><div class="browser-dot bd-g"></div></div>
             <div class="browser-url">localhost:8088/apidocs</div>
           </div>
-          <div class="mock-ui">
-            <div class="mock-shell">
-              <div class="mock-sidebar">
-                <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
-                <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
-                <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
-                <div class="mock-nav-section">執行</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
-                <div class="mock-nav-section">Admin</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
-                <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
-              </div>
-              <div class="mock-main">
-                <div class="mock-topbar">
-                  <div class="mock-page-title">API 文件</div>
-                  <div style="display:flex;align-items:center;gap:.5rem;font-size:.58rem;">
-                    <span style="color:#22C55E;display:flex;align-items:center;gap:.2rem;"><span style="width:6px;height:6px;border-radius:50%;background:#22C55E;display:inline-block;"></span>5 上線中</span>
-                    <span style="color:#94A3B8;">1 草稿</span>
-                  </div>
+          <div class="mock-ui"><div class="mock-shell">
+            <div class="mock-sidebar">
+              <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
+              <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
+              <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
+              <div class="mock-nav-section">執行</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
+              <div class="mock-nav-section">Admin</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
+              <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-topbar">
+                <div class="mock-page-title">API 文件</div>
+                <div style="display:flex;align-items:center;gap:.5rem;font-size:.58rem;">
+                  <span style="color:#22C55E;display:flex;align-items:center;gap:.2rem;"><span style="width:6px;height:6px;border-radius:50%;background:#22C55E;display:inline-block;"></span>5 上線中</span>
+                  <span style="color:#94A3B8;">1 草稿</span>
                 </div>
-                <div style="display:flex;flex:1;overflow:hidden;">
-                  <div class="mock-doc-sidebar">
-                    <div class="mock-doc-search"><input class="mock-doc-search-input" placeholder="搜尋 API..." readonly></div>
-                    <div class="mock-doc-section">上線中</div>
-                    <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">銷售績效分析</span></div><div class="mock-doc-api-path">/sales/performance</div></div>
-                    <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">庫存安全水位</span></div><div class="mock-doc-api-path">/inv/safety-stock</div></div>
-                    <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-post" style="font-size:.5rem;padding:.05rem .28rem;">POST</span><span class="mock-doc-api-name">訂單進度追蹤</span></div><div class="mock-doc-api-path">/orders/progress</div></div>
-                    <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">供應商評分查詢</span></div><div class="mock-doc-api-path">/vendor/score</div></div>
-                    <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-post" style="font-size:.5rem;padding:.05rem .28rem;">POST</span><span class="mock-doc-api-name">客服工單統計</span></div><div class="mock-doc-api-path">/service/tickets</div></div>
-                    <div class="mock-doc-section" style="margin-top:.3rem;">草稿</div>
-                    <div class="mock-doc-api-item" style="opacity:.6;"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">財務月報彙整</span></div><div class="mock-doc-api-path">/finance/monthly</div></div>
+              </div>
+              <div style="display:flex;flex:1;overflow:hidden;">
+                <div class="mock-doc-sidebar">
+                  <div class="mock-doc-search"><input class="mock-doc-search-input" placeholder="搜尋 API..." readonly></div>
+                  <div class="mock-doc-section">上線中</div>
+                  <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">銷售績效分析</span></div><div class="mock-doc-api-path">/sales/performance</div></div>
+                  <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">庫存安全水位</span></div><div class="mock-doc-api-path">/inv/safety-stock</div></div>
+                  <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-post" style="font-size:.5rem;padding:.05rem .28rem;">POST</span><span class="mock-doc-api-name">訂單進度追蹤</span></div><div class="mock-doc-api-path">/orders/progress</div></div>
+                  <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">供應商評分查詢</span></div><div class="mock-doc-api-path">/vendor/score</div></div>
+                  <div class="mock-doc-api-item"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-post" style="font-size:.5rem;padding:.05rem .28rem;">POST</span><span class="mock-doc-api-name">客服工單統計</span></div><div class="mock-doc-api-path">/service/tickets</div></div>
+                  <div class="mock-doc-section" style="margin-top:.3rem;">草稿</div>
+                  <div class="mock-doc-api-item" style="opacity:.6;"><div style="display:flex;align-items:center;gap:.3rem;margin-bottom:.06rem;"><span class="m-badge m-get" style="font-size:.5rem;padding:.05rem .28rem;">GET</span><span class="mock-doc-api-name">財務月報彙整</span></div><div class="mock-doc-api-path">/finance/monthly</div></div>
+                </div>
+                <div class="mock-doc-main">
+                  <div class="mock-doc-cards">
+                    <div class="mock-doc-card"><div class="mock-doc-card-icon card-blue">{}</div><div><div class="mock-doc-card-n">6</div><div class="mock-doc-card-l">全部 API</div></div></div>
+                    <div class="mock-doc-card"><div class="mock-doc-card-icon card-green">↑</div><div><div class="mock-doc-card-n">5</div><div class="mock-doc-card-l">上線中</div></div></div>
+                    <div class="mock-doc-card"><div class="mock-doc-card-icon card-gray">✎</div><div><div class="mock-doc-card-n">1</div><div class="mock-doc-card-l">草稿</div></div></div>
+                    <div class="mock-doc-card"><div class="mock-doc-card-icon card-amber">🔒</div><div><div class="mock-doc-card-n">2</div><div class="mock-doc-card-l">需要 Token</div></div></div>
                   </div>
-                  <div class="mock-doc-main">
-                    <div class="mock-doc-cards">
-                      <div class="mock-doc-card"><div class="mock-doc-card-icon card-blue">{}</div><div><div class="mock-doc-card-n">6</div><div class="mock-doc-card-l">全部 API</div></div></div>
-                      <div class="mock-doc-card"><div class="mock-doc-card-icon card-green">↑</div><div><div class="mock-doc-card-n">5</div><div class="mock-doc-card-l">上線中</div></div></div>
-                      <div class="mock-doc-card"><div class="mock-doc-card-icon card-gray">✎</div><div><div class="mock-doc-card-n">1</div><div class="mock-doc-card-l">草稿</div></div></div>
-                      <div class="mock-doc-card"><div class="mock-doc-card-icon card-amber">🔒</div><div><div class="mock-doc-card-n">2</div><div class="mock-doc-card-l">需要 Token</div></div></div>
-                    </div>
-                    <div style="font-size:.57rem;color:#94A3B8;letter-spacing:.06em;text-transform:uppercase;font-weight:500;margin-bottom:.35rem;">≡ API 清單</div>
-                    <table class="mock-doc-table">
-                      <thead><tr><th style="width:26%">名稱</th><th style="width:8%">方法</th><th style="width:24%">路徑</th><th style="width:10%">連線</th><th style="width:8%">參數</th><th style="width:8%">TOKEN</th><th style="width:16%">狀態</th></tr></thead>
-                      <tbody>
-                        <tr><td style="font-weight:500;color:#1E293B;">銷售績效分析</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/sales/performance</td><td class="mock-conn">PROD_DB</td><td><span class="mock-param-count">3</span></td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
-                        <tr><td style="font-weight:500;color:#1E293B;">庫存安全水位</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/inv/safety-stock</td><td class="mock-conn">WMS_DB</td><td><span class="mock-param-count">2</span></td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
-                        <tr><td style="font-weight:500;color:#1E293B;">訂單進度追蹤</td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/orders/progress</td><td class="mock-conn">ERP_DB</td><td><span class="mock-param-count">2</span></td><td><span class="mock-lock-on">🔒</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
-                        <tr><td style="font-weight:500;color:#1E293B;">供應商評分查詢</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/vendor/score</td><td class="mock-conn">ERP_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
-                        <tr><td style="font-weight:500;color:#1E293B;">客服工單統計</td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/service/tickets</td><td class="mock-conn">CRM_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-on">🔒</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
-                        <tr style="opacity:.6;"><td style="font-weight:500;color:#1E293B;">財務月報彙整</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/finance/monthly</td><td class="mock-conn">FIN_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-draft">草稿</span></td></tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  <div style="font-size:.57rem;color:#94A3B8;letter-spacing:.06em;text-transform:uppercase;font-weight:500;margin-bottom:.35rem;">≡ API 清單</div>
+                  <table class="mock-doc-table">
+                    <thead><tr><th style="width:26%">名稱</th><th style="width:8%">方法</th><th style="width:24%">路徑</th><th style="width:10%">連線</th><th style="width:8%">參數</th><th style="width:8%">TOKEN</th><th style="width:16%">狀態</th></tr></thead>
+                    <tbody>
+                      <tr><td style="font-weight:500;color:#1E293B;">銷售績效分析</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/sales/performance</td><td class="mock-conn">PROD_DB</td><td><span class="mock-param-count">3</span></td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
+                      <tr><td style="font-weight:500;color:#1E293B;">庫存安全水位</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/inv/safety-stock</td><td class="mock-conn">WMS_DB</td><td><span class="mock-param-count">2</span></td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
+                      <tr><td style="font-weight:500;color:#1E293B;">訂單進度追蹤</td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/orders/progress</td><td class="mock-conn">ERP_DB</td><td><span class="mock-param-count">2</span></td><td><span class="mock-lock-on">🔒</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
+                      <tr><td style="font-weight:500;color:#1E293B;">供應商評分查詢</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/vendor/score</td><td class="mock-conn">ERP_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
+                      <tr><td style="font-weight:500;color:#1E293B;">客服工單統計</td><td><span class="m-badge m-post">POST</span></td><td class="mock-conn">/service/tickets</td><td class="mock-conn">CRM_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-on">🔒</span></td><td><span class="m-badge m-online">● Online</span></td></tr>
+                      <tr style="opacity:.6;"><td style="font-weight:500;color:#1E293B;">財務月報彙整</td><td><span class="m-badge m-get">GET</span></td><td class="mock-conn">/finance/monthly</td><td class="mock-conn">FIN_DB</td><td style="color:#94A3B8;font-size:.58rem;">—</td><td><span class="mock-lock-icon">🔓</span></td><td><span class="m-badge m-draft">草稿</span></td></tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </div>
       </div>
 
@@ -818,57 +708,55 @@
             <div class="browser-dots"><div class="browser-dot bd-r"></div><div class="browser-dot bd-y"></div><div class="browser-dot bd-g"></div></div>
             <div class="browser-url">localhost:8088/admin/users</div>
           </div>
-          <div class="mock-ui">
-            <div class="mock-shell">
-              <div class="mock-sidebar">
-                <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
-                <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
-                <div class="mock-nav-section">執行</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
-                <div class="mock-nav-section">Admin</div>
-                <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
-                <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>備份管理</div>
-                <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
+          <div class="mock-ui"><div class="mock-shell">
+            <div class="mock-sidebar">
+              <div class="mock-logo"><div class="mock-logo-icon">{}</div>API 協作平台</div>
+              <div class="mock-nav-item" style="margin-top:.3rem;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Dashboard</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>API 管理</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>API 文件</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>連線管理</div>
+              <div class="mock-nav-section">執行</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>執行分析</div>
+              <div class="mock-nav-section">Admin</div>
+              <div class="mock-nav-item active"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>使用者管理</div>
+              <div class="mock-nav-item"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.76"/></svg>備份管理</div>
+              <div class="mock-nav-user"><div class="mock-nav-user-icon">A</div><div class="mock-nav-user-name">admin</div><div class="mock-nav-user-badge">Admin</div></div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-topbar">
+                <div class="mock-page-title">使用者管理</div>
+                <div class="mock-actions"><div class="mock-btn mock-btn-primary">＋ 新增使用者</div></div>
               </div>
-              <div class="mock-main">
-                <div class="mock-topbar">
-                  <div class="mock-page-title">使用者管理</div>
-                  <div class="mock-actions"><div class="mock-btn mock-btn-primary">＋ 新增使用者</div></div>
+              <div class="mock-content">
+                <div class="mock-user-cards">
+                  <div class="mock-user-card"><div class="mock-user-card-icon cu-blue">👥</div><div><div class="mock-user-card-n">3</div><div class="mock-user-card-l">使用者總數</div></div></div>
+                  <div class="mock-user-card"><div class="mock-user-card-icon cu-green">✓</div><div><div class="mock-user-card-n">3</div><div class="mock-user-card-l">啟用中</div></div></div>
+                  <div class="mock-user-card"><div class="mock-user-card-icon cu-red">⚑</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Admin</div></div></div>
+                  <div class="mock-user-card"><div class="mock-user-card-icon cu-blue">✎</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Editor</div></div></div>
+                  <div class="mock-user-card"><div class="mock-user-card-icon cu-gray">◉</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Viewer</div></div></div>
                 </div>
-                <div class="mock-content">
-                  <div class="mock-user-cards">
-                    <div class="mock-user-card"><div class="mock-user-card-icon cu-blue">👥</div><div><div class="mock-user-card-n">3</div><div class="mock-user-card-l">使用者總數</div></div></div>
-                    <div class="mock-user-card"><div class="mock-user-card-icon cu-green">✓</div><div><div class="mock-user-card-n">3</div><div class="mock-user-card-l">啟用中</div></div></div>
-                    <div class="mock-user-card"><div class="mock-user-card-icon cu-red">⚑</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Admin</div></div></div>
-                    <div class="mock-user-card"><div class="mock-user-card-icon cu-blue">✎</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Editor</div></div></div>
-                    <div class="mock-user-card"><div class="mock-user-card-icon cu-gray">◉</div><div><div class="mock-user-card-n">1</div><div class="mock-user-card-l">Viewer</div></div></div>
-                  </div>
-                  <table class="mock-user-table">
-                    <thead><tr><th style="width:18%">帳號</th><th style="width:14%">姓名</th><th style="width:26%">EMAIL</th><th style="width:10%">角色</th><th style="width:10%">API 權限</th><th style="width:8%">狀態</th><th style="width:14%">上次登入</th></tr></thead>
+                <table class="mock-user-table">
+                  <thead><tr><th style="width:18%">帳號</th><th style="width:14%">姓名</th><th style="width:26%">EMAIL</th><th style="width:10%">角色</th><th style="width:10%">API 權限</th><th style="width:8%">狀態</th><th style="width:14%">上次登入</th></tr></thead>
+                  <tbody>
+                    <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ admin</td><td style="color:#475569;">System Admin</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">admin@corp.local</td><td><span class="mock-role-badge role-admin">Admin</span></td><td style="font-size:.6rem;color:#64748B;">∞ 全域</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/29 09:12</td></tr>
+                    <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ alice_wang</td><td style="color:#475569;">王小菁</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">alice@corp.local</td><td><span class="mock-role-badge role-editor">Editor</span></td><td style="font-size:.6rem;color:#3B82F6;">⇌ 設定</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/28 14:35</td></tr>
+                    <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ bob_chen</td><td style="color:#475569;">陳大明</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">bob@corp.local</td><td><span class="mock-role-badge role-viewer">Viewer</span></td><td style="font-size:.6rem;color:#94A3B8;">唯讀</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/27 10:08</td></tr>
+                  </tbody>
+                </table>
+                <div style="background:#fff;border:1px solid #E2E8F0;border-radius:4px;overflow:hidden;">
+                  <div class="mock-perm-info">ⓘ 角色權限說明</div>
+                  <table class="mock-perm-table">
+                    <thead><tr><th style="width:12%">角色</th><th>使用者管理</th><th>API 管理</th><th>連線管理</th><th>執行日誌</th><th>系統設定</th></tr></thead>
                     <tbody>
-                      <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ admin</td><td style="color:#475569;">System Admin</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">admin@corp.local</td><td><span class="mock-role-badge role-admin">Admin</span></td><td style="font-size:.6rem;color:#64748B;">∞ 全域</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/29 09:12</td></tr>
-                      <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ alice_wang</td><td style="color:#475569;">王小菁</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">alice@corp.local</td><td><span class="mock-role-badge role-editor">Editor</span></td><td style="font-size:.6rem;color:#3B82F6;cursor:pointer;">⇌ 設定</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/28 14:35</td></tr>
-                      <tr><td style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#1E293B;font-weight:500;">⊙ bob_chen</td><td style="color:#475569;">陳大明</td><td style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:#64748B;">bob@corp.local</td><td><span class="mock-role-badge role-viewer">Viewer</span></td><td style="font-size:.6rem;color:#94A3B8;">唯讀</td><td><span class="mock-status-on">啟用</span></td><td style="font-family:'JetBrains Mono',monospace;font-size:.57rem;color:#94A3B8;">2026/05/27 10:08</td></tr>
+                      <tr><td><span class="mock-role-badge role-admin" style="font-size:.52rem;">Admin</span></td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td></tr>
+                      <tr><td><span class="mock-role-badge role-editor" style="font-size:.52rem;">Editor</span></td><td class="perm-no">—</td><td class="perm-partial">授權範圍</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-no">—</td></tr>
+                      <tr><td><span class="mock-role-badge role-viewer" style="font-size:.52rem;">Viewer</span></td><td class="perm-no">—</td><td class="perm-readonly">唯讀授權</td><td class="perm-readonly">唯讀</td><td class="perm-ok">完整</td><td class="perm-no">—</td></tr>
                     </tbody>
                   </table>
-                  <div style="background:#fff;border:1px solid #E2E8F0;border-radius:4px;overflow:hidden;">
-                    <div class="mock-perm-info">ⓘ 角色權限說明</div>
-                    <table class="mock-perm-table">
-                      <thead><tr><th style="width:12%">角色</th><th>使用者管理</th><th>API 管理</th><th>連線管理</th><th>執行日誌</th><th>系統設定</th></tr></thead>
-                      <tbody>
-                        <tr><td><span class="mock-role-badge role-admin" style="font-size:.52rem;">Admin</span></td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td></tr>
-                        <tr><td><span class="mock-role-badge role-editor" style="font-size:.52rem;">Editor</span></td><td class="perm-no">—</td><td class="perm-partial">授權範圍</td><td class="perm-ok">完整</td><td class="perm-ok">完整</td><td class="perm-no">—</td></tr>
-                        <tr><td><span class="mock-role-badge role-viewer" style="font-size:.52rem;">Viewer</span></td><td class="perm-no">—</td><td class="perm-readonly">唯讀授權</td><td class="perm-readonly">唯讀</td><td class="perm-ok">完整</td><td class="perm-no">—</td></tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div></div>
         </div>
       </div>
     </div>
@@ -982,12 +870,9 @@
   <div class="cta-glow"></div>
   <div class="container cta-inner">
     <h2 class="cta-title reveal">準備好了嗎？<br><em>從第一個 API 開始。</em></h2>
-    <p class="cta-sub reveal d1">Clone 專案、設定 .env、執行 docker-compose up——<br>五分鐘內上線第一支 API。</p>
+    <p class="cta-sub reveal d1">設定連線、填寫 SQL、發布——<br>五分鐘內上線第一支 API。</p>
     <div class="cta-btns reveal d2">
-      <a href="https://github.com" class="btn btn-green" target="_blank">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-        GitHub 專案
-      </a>
+      <a href="#screens" class="btn btn-green">查看功能預覽 →</a>
       <a href="#hero" class="btn btn-outline">回頂部 ↑</a>
     </div>
   </div>
@@ -1007,29 +892,24 @@
         <a href="#screens">預覽</a>
         <a href="#features">功能</a>
         <a href="#arch">架構</a>
-        <a href="https://github.com" target="_blank">GitHub</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('sc', scrollY > 20), {passive:true});
 
-  // Reveal on scroll
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-  // Hero instant reveal
   document.querySelectorAll('#hero .reveal').forEach((el, i) => {
     setTimeout(() => el.classList.add('in'), i * 120 + 150);
   });
 
-  // Screenshot tabs
   window.switchTab = function(idx) {
     document.querySelectorAll('.stab').forEach((t,i) => t.classList.toggle('active', i===idx));
     document.querySelectorAll('.screen-pane').forEach((p,i) => p.classList.toggle('active', i===idx));
